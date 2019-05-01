@@ -16,7 +16,7 @@ const GenreEditForm:React.FC<ModalProps & InjectedFormProps<Genre, ModalProps>> 
     const { show, handleSubmit, handleDelete, onHide } = props
 
     return (
-        <ModalForm title="Genre" show={show} onSubmit={handleSubmit} onHide={onHide}>
+        <ModalForm title="Genre" show={show} onSubmit={handleSubmit} onHide={handleSubmit(() => onHide())}>
             <div className="clearfix p-0 m-0">
                 <span className="float-right">
                     <button onClick={handleSubmit(values => handleDelete(values.id))} className="btn btn-square btn-outline-danger">

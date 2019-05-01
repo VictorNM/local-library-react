@@ -5,7 +5,7 @@ import { Toolbar } from '../../../template';
 class GenreToolbar extends Component<{onClick: () => void}> {
     render() {
         return (
-            <Toolbar onButtonClick={this.props.onClick} />
+            <Toolbar title="Genre" onButtonClick={this.props.onClick} />
         );
     }
 }
