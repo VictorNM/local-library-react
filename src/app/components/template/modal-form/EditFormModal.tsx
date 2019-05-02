@@ -45,7 +45,6 @@ class EditFormModal extends Component<Props, State> {
             title,
             show,
             onSubmit,
-            onDelete,
             onHide,
             btnSubmitDisabled,
             btnCancelDisable,
