@@ -1,55 +1,94 @@
 import React, { Component } from 'react';
-import GenreToolbar from './toolbar/GenreToolbar';
-import GenreCreateFormContainer from './form/GenreCreateFormContainer';
-import GenreEditFormContainer from './form/GenreEditFormContainer';
-import GenreTableContainer from './table/GenreTableContainer';
+import Toolbar from './toolbar/GenreToolbar';
+import CreateForm from './form/GenreCreateFormContainer';
+import EditForm from './form/GenreEditFormContainer';
+import Table from './table/GenreTableContainer';
+
+interface Props {
+    isGetDetailSucceed: boolean,
+    isCreateSucceed: boolean,
+    isUpdateSucceed: boolean,
+    isDeleteSucceed: boolean
+}
 
 interface State {
     showCreateForm: boolean,
     showEditForm: boolean
 }
 
-class GenrePage extends Component<{}, State> {
+class GenrePage extends Component<Props, State> {
     constructor(props: any) {
         super(props)
 
         this.state = { showCreateForm: false, showEditForm: false }
-
-        this.handleCreateFormShow = this.handleCreateFormShow.bind(this);
-        this.handleCreateFormClose = this.handleCreateFormClose.bind(this);
-        this.handleEditFormShow = this.handleEditFormShow.bind(this);
-        this.handleEditFormClose = this.handleEditFormClose.bind(this);
     }
 
-    handleCreateFormClose() {
-        this.setState({ showCreateForm: false });
+    componentWillReceiveProps(nextProps: Props) {
+        this.handleIfGetDetailSucceed(nextProps);
+        this.handleIfCreateSucceed(nextProps);
+        this.handleIfUpdateSucceed(nextProps);
+        this.handleIfDeleteSucceed(nextProps);
     }
-
-    handleCreateFormShow() {
-        this.setState({ showCreateForm: true });
-    }
-
-    handleEditFormShow() {
-        this.setState({ showEditForm: true });
-    }
-
-    handleEditFormClose() {
-        this.setState({ showEditForm: false });
-    }
-
 
     render() {
         const { showCreateForm, showEditForm } = this.state;
 
         return (
             <div>
-                <GenreToolbar onClick={this.handleCreateFormShow}/>
-                <GenreTableContainer onGenreClick={this.handleEditFormShow}/>
-                <GenreCreateFormContainer show={showCreateForm} onHide={this.handleCreateFormClose}/>
-                <GenreEditFormContainer show={showEditForm} onHide={this.handleEditFormClose} />
-
+                <Toolbar onCreateClick={this.showCreateForm}/>
+                <Table />
+                <CreateForm show={showCreateForm} onHide={this.hideCreateForm}/>
+                <EditForm show={showEditForm} onHide={this.hideEditForm} />
             </div>
         )
+    }
+
+    handleIfGetDetailSucceed(nextProps: Props) {
+        if (this.props.isGetDetailSucceed !== nextProps.isGetDetailSucceed) {
+            if (nextProps.isGetDetailSucceed) {
+                this.showEditForm()
+            }
+        }
+    }
+
+    handleIfCreateSucceed(nextProps: Props) {
+        if (this.props.isCreateSucceed !== nextProps.isCreateSucceed) {
+            if (nextProps.isCreateSucceed) {
+                this.hideCreateForm()
+            }
+        }
+    }
+
+    handleIfUpdateSucceed(nextProps: Props) {
+        if (this.props.isUpdateSucceed !== nextProps.isUpdateSucceed) {
+            if (nextProps.isUpdateSucceed) {
+                this.hideEditForm()
+            }
+        }
+    }
+
+    handleIfDeleteSucceed(nextProps: Props) {
+        if (this.props.isDeleteSucceed !== nextProps.isDeleteSucceed) {
+            if (nextProps.isDeleteSucceed) {
+                this.hideEditForm()
+            }
+        }
+    }
+
+    hideCreateForm = () => {
+        this.setState({ showCreateForm: false });
+    }
+
+    showCreateForm = () => {
+        this.setState({ showCreateForm: true });
+    }
+
+    showEditForm = () => {
+        this.setState({ showEditForm: true });
+    }
+
+    hideEditForm = () => {
+        this.setState({ showEditForm: false });
     }
 
 }

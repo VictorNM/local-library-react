@@ -8,21 +8,16 @@ import rootSelector from '../../../../modules/rootSelector';
 
 const genreActions = rootActions.genreActions
 
-interface OwnProps {
-    onGenreClick: () => void
-}
-
 const mapStateToProps = (state: any) => {
     return {
         genres: rootSelector.getAllGenres(state)
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, ownProps: OwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
     return {
         onLoad: () => dispatch(genreActions.getAllGenresAsync()),
         onGenreClick(id: number) {
-            ownProps.onGenreClick();
             dispatch(genreActions.getGenreDetailAsync(id));
         }
     }

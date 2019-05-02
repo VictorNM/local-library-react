@@ -11,7 +11,7 @@ const genreActions = rootActions.genreActions;
 
 const mapStateToProps = (state: any, ownProps: any) => {
     return {
-        show: rootSelector.getCurrentGenre(state) !== null,
+        show: ownProps.show,
         initialValues: rootSelector.getCurrentGenre(state)
     }
 }

@@ -5,24 +5,51 @@ interface Props {
     title: string,
     show: boolean,
     onSubmit: any,
-    onHide: () => void
+    onHide: () => void,
+    btnSubmitDisabled: boolean,
+    btnCancelDisable: boolean
 }
 
 const ModalForm: React.FC<Props> = props => {
-    const { title, show, onSubmit, onHide, children } = props;
+    const {
+        title, 
+        show, 
+        onSubmit, 
+        onHide,
+        btnSubmitDisabled,
+        btnCancelDisable,
+        children 
+    } = props;
+
     return (
         <Modal show={show} onHide={onHide} >
             <form onSubmit={onSubmit}>
+
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
                     {children}
                 </Modal.Body>
+
                 <Modal.Footer>
-                    <button type="submit" className="btn btn-primary">Save</button>
-                    <button onClick={onHide} className="btn btn-secondary">Cancel</button>
+                    <button 
+                        type="submit" 
+                        className="btn btn-primary"
+                        disabled={btnSubmitDisabled}
+                    >
+                        Save
+                    </button>
+                    <button 
+                        onClick={onHide}
+                        className="btn btn-secondary"
+                        disabled={btnCancelDisable}
+                    >
+                        Cancel
+                    </button>
                 </Modal.Footer>
+
             </form>
         </Modal>
     )

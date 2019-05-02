@@ -1,13 +1,14 @@
-import { AnyAction } from "redux";
+import { combineReducers, AnyAction } from "redux";
 
 import genreActionTypes from '../domain/genre/action-types';
+import genreReducer from './genre/reducer';
 
 const initialState = {
     isLoading: false,
     error: null
 }
 
-const reducer = (state = initialState, action: AnyAction) => {
+const globalReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case genreActionTypes.GET_ALL_GENRES_ASYNC:
         case genreActionTypes.GET_GENRE_DETAIL_ASYNC:
@@ -30,9 +31,15 @@ const reducer = (state = initialState, action: AnyAction) => {
         case genreActionTypes.DELETE_GENRE_FAILED:
             return {isLoading: false, error: action.error}
 
+        case 'CLEAR_ERROR':
+            return {...state, error: null}
+
         default:
             return state
     }
 }
 
-export default reducer
+export default combineReducers({
+    genre: genreReducer,
+    global: globalReducer
+})

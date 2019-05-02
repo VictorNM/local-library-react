@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
 import { ModalForm } from '../../../template';
@@ -9,19 +9,29 @@ interface ModalProps {
     onHide: () => void
 }
 
-const GenreCreateForm:React.FC<ModalProps & InjectedFormProps<Genre, ModalProps>> = props => {
-    const { show, handleSubmit, onHide } = props
+class GenreCreateForm extends Component<ModalProps & InjectedFormProps<Genre, ModalProps>> {
+    render() {
+        const { show, handleSubmit, onHide, pristine, submitting } = this.props
 
-    return (
-        <ModalForm title="Create Genre" show={show} onSubmit={handleSubmit} onHide={handleSubmit(() => onHide())}>
-            <div className="form-group">
-                <label>Name</label>
-                <div>
-                    <Field name="name" component="input" className="form-control" />
+        return (
+            <ModalForm
+                title="Create Genre"
+                show={show}
+                onSubmit={handleSubmit}
+                onHide={handleSubmit(() => onHide())}
+                btnSubmitDisabled={pristine || submitting}
+                btnCancelDisable={submitting}
+            >
+                <div className="form-group">
+                    <label>Name</label>
+                    <div>
+                        <Field name="name" component="input" className="form-control" />
+                    </div>
                 </div>
-            </div>
-        </ModalForm>
-    )
+            </ModalForm>
+        )
+    }
+
 }
 
 export default reduxForm<Genre, ModalProps>({

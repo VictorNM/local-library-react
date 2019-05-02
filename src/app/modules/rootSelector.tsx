@@ -16,5 +16,17 @@ export default {
         appSelector.getIsLoading(state.app),
 
     getError: (state: rootState) =>
-        appSelector.getError(state.app)
+        appSelector.getError(state.app),
+
+    getIsGetGenreDetailSucceed: (state: rootState) =>
+        appSelector.getIsGetGenreDetailSucceed(state.app),
+
+    getIsCreateGenreSucceed: (state: rootState) =>
+        appSelector.getIsCreateGenreSucceed(state.app),
+
+    getIsUpdateGenreSucceed: (state: rootState) =>
+        appSelector.getIsUpdateGenreSucceed(state.app),
+
+    getIsDeleteGenreSucceed: (state: rootState) =>
+        appSelector.getIsDeleteGenreSucceed(state.app),
 }

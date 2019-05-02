@@ -5,6 +5,7 @@ import { GenrePage } from '../../pages';
 import LoadingIndicator from '../../common/loading-indicator/LoadingIndicatorContainer';
 
 import './Main.css';
+import ErrorModal from '../../common/error-modal/ErrorModalContainer';
 
 class Main extends Component {
 
@@ -13,6 +14,7 @@ class Main extends Component {
             <main>
                 <Route path='/genre' component={GenrePage} />
                 <LoadingIndicator />
+                <ErrorModal />
             </main>
         )
     }

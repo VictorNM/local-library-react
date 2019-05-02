@@ -1,10 +1,10 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
+import { AnyAction } from "redux";
 
 import ActionTypes from './action-types';
 import actions from './actions';
 import { genreApi } from '../../../../api';
 import { Genre } from '../../../../dto';
-import { AnyAction } from "redux";
 
 export function* saga() {
     yield all([

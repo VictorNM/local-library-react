@@ -1,3 +1,3 @@
-import GenrePage from './GenrePage';
+import GenrePage from './GenrePageContainer';
 
 export default GenrePage;
