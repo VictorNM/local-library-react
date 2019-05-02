@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { Row } from '../../../template';
+import { Genre } from '../../../../../dto';
 
-export interface Props {
-    id: number
-    name: string
+export interface Props extends Genre {
     onGenreClick: () => void
 }
 

@@ -20,7 +20,7 @@ class GenreCreateForm extends Component<ModalProps & InjectedFormProps<Genre, Mo
                 onSubmit={handleSubmit}
                 onHide={onHide}
                 btnSubmitDisabled={pristine || submitting}
-                btnCancelDisable={submitting}
+                btnCancelDisabled={submitting}
             >
                 <div className="form-group">
                     <label>Name</label>

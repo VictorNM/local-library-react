@@ -21,7 +21,7 @@ class GenreTable extends Component<Props> {
             <Table>
                 <thead>
                     <Row>
-                        <th className="col-12">Title</th>
+                        <th className="col-12">Name</th>
                     </Row>
                 </thead>
                 <tbody>

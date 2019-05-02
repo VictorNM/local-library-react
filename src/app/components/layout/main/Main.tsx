@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import { GenrePage } from '../../pages';
+import { AuthorPage, GenrePage } from '../../pages';
 import LoadingIndicator from '../../common/loading-indicator/LoadingIndicatorContainer';
+import ErrorModal from '../../common/error-modal/ErrorModalContainer';
 
 import './Main.css';
-import ErrorModal from '../../common/error-modal/ErrorModalContainer';
 
 class Main extends Component {
 
     render() {
         return (
             <main>
+                <Route path='/author' component={AuthorPage} />
                 <Route path='/genre' component={GenrePage} />
                 <LoadingIndicator />
                 <ErrorModal />

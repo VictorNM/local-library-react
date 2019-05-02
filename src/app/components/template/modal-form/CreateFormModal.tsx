@@ -7,7 +7,7 @@ interface Props {
     onSubmit: any,
     onHide: () => void,
     btnSubmitDisabled: boolean,
-    btnCancelDisable: boolean
+    btnCancelDisabled: boolean
 }
 
 const CreateModalForm: React.FC<Props> = props => {
@@ -17,7 +17,7 @@ const CreateModalForm: React.FC<Props> = props => {
         onSubmit, 
         onHide,
         btnSubmitDisabled,
-        btnCancelDisable,
+        btnCancelDisabled,
         children 
     } = props;
 
@@ -45,7 +45,7 @@ const CreateModalForm: React.FC<Props> = props => {
                         type="button"
                         onClick={onHide}
                         className="btn btn-secondary"
-                        disabled={btnCancelDisable}
+                        disabled={btnCancelDisabled}
                     >
                         Cancel
                     </button>
