@@ -3,6 +3,7 @@ import Toolbar from './toolbar/GenreToolbar';
 import CreateForm from './form/GenreCreateFormContainer';
 import EditForm from './form/GenreEditFormContainer';
 import Table from './table/GenreTableContainer';
+import SuccessModal from '../../common/success-modal';
 
 interface Props {
     isGetDetailSucceed: boolean,
@@ -13,14 +14,19 @@ interface Props {
 
 interface State {
     showCreateForm: boolean,
-    showEditForm: boolean
+    showEditForm: boolean,
+    successMessage: string | null
 }
 
 class GenrePage extends Component<Props, State> {
     constructor(props: any) {
         super(props)
 
-        this.state = { showCreateForm: false, showEditForm: false }
+        this.state = { 
+            showCreateForm: false, 
+            showEditForm: false,
+            successMessage: null,
+        }
     }
 
     componentWillReceiveProps(nextProps: Props) {
@@ -31,7 +37,7 @@ class GenrePage extends Component<Props, State> {
     }
 
     render() {
-        const { showCreateForm, showEditForm } = this.state;
+        const { showCreateForm, showEditForm, successMessage } = this.state;
 
         return (
             <div>
@@ -39,6 +45,7 @@ class GenrePage extends Component<Props, State> {
                 <Table />
                 <CreateForm show={showCreateForm} onHide={this.hideCreateForm}/>
                 <EditForm show={showEditForm} onHide={this.hideEditForm} />
+                { successMessage ? <SuccessModal show={true} message={successMessage} onHide={this.clearSuccessMessage} /> : null }
             </div>
         )
     }
@@ -55,6 +62,7 @@ class GenrePage extends Component<Props, State> {
         if (this.props.isCreateSucceed !== nextProps.isCreateSucceed) {
             if (nextProps.isCreateSucceed) {
                 this.hideCreateForm()
+                this.setSuccessMessage('Create successfully')
             }
         }
     }
@@ -63,6 +71,7 @@ class GenrePage extends Component<Props, State> {
         if (this.props.isUpdateSucceed !== nextProps.isUpdateSucceed) {
             if (nextProps.isUpdateSucceed) {
                 this.hideEditForm()
+                this.setSuccessMessage('Update successfully')
             }
         }
     }
@@ -71,6 +80,7 @@ class GenrePage extends Component<Props, State> {
         if (this.props.isDeleteSucceed !== nextProps.isDeleteSucceed) {
             if (nextProps.isDeleteSucceed) {
                 this.hideEditForm()
+                this.setSuccessMessage('Delete successfully')
             }
         }
     }
@@ -89,6 +99,14 @@ class GenrePage extends Component<Props, State> {
 
     hideEditForm = () => {
         this.setState({ showEditForm: false });
+    }
+
+    setSuccessMessage = (message: string) => {
+        this.setState({ successMessage: message })
+    }
+
+    clearSuccessMessage = () => {
+        this.setState({ successMessage: null })
     }
 
 }

@@ -1,10 +1,11 @@
 import Toolbar from './toolbar';
-import ModalForm from './modal-form';
+import { CreateFormModal, EditFormModal } from './modal-form';
 import { Table, Row } from './table';
 
 export {
     Toolbar,
-    ModalForm,
+    CreateFormModal,
+    EditFormModal,
     Row,
     Table
 }

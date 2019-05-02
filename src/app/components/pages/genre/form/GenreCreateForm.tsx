@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
-import { ModalForm } from '../../../template';
+import { CreateFormModal } from '../../../template';
 import { Genre } from '../../../../../dto';
 
 interface ModalProps {
@@ -14,11 +14,11 @@ class GenreCreateForm extends Component<ModalProps & InjectedFormProps<Genre, Mo
         const { show, handleSubmit, onHide, pristine, submitting } = this.props
 
         return (
-            <ModalForm
+            <CreateFormModal
                 title="Create Genre"
                 show={show}
                 onSubmit={handleSubmit}
-                onHide={handleSubmit(() => onHide())}
+                onHide={onHide}
                 btnSubmitDisabled={pristine || submitting}
                 btnCancelDisable={submitting}
             >
@@ -28,7 +28,7 @@ class GenreCreateForm extends Component<ModalProps & InjectedFormProps<Genre, Mo
                         <Field name="name" component="input" className="form-control" />
                     </div>
                 </div>
-            </ModalForm>
+            </CreateFormModal>
         )
     }
 

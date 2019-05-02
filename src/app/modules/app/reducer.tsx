@@ -5,7 +5,7 @@ import genreReducer from './genre/reducer';
 
 const initialState = {
     isLoading: false,
-    error: null
+    error: null,
 }
 
 const globalReducer = (state = initialState, action: AnyAction) => {
