@@ -46,6 +46,6 @@ const AuthorCreateForm: React.FC<ModalProps & InjectedFormProps<Author, ModalPro
 }
 
 export default reduxForm<Author, ModalProps>({
-    form: 'genreCreateForm',
+    form: 'authorCreateForm',
     enableReinitialize: true
 })(AuthorCreateForm)
