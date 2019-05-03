@@ -5,10 +5,11 @@ export interface Genre {
 
 export interface Author {
     id: number,
-    lastName: string,
-    firstName: string,
-    dateOfBirth: string,
-    dateOfDeath: string,
+    family_name: string,
+    first_name: string,
+    date_of_birth: string,
+    date_of_death: string,
 
-    name: string
+    name: string,
+    lifespan: number
 }

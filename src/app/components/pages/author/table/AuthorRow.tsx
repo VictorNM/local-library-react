@@ -8,15 +8,16 @@ export interface Props extends Author {
 }
 
 const AuthorRow: React.FC<Props> = props => {
-    const { name, dateOfBirth, dateOfDeath, onAuthorClick } = props;
+    const { name, lifespan, date_of_birth, date_of_death, onAuthorClick } = props;
     const tdStyle = {
         cursor: 'pointer'
     }
     return (
         <Row>
-            <td className="col-4" onClick={onAuthorClick} style={tdStyle}>{name}</td>
-            <td className="col-4">{dateOfBirth}</td>
-            <td className="col-4">{dateOfDeath}</td>
+            <td className="col-3" onClick={onAuthorClick} style={tdStyle}>{name}</td>
+            <td className="col-3">{lifespan}</td>
+            <td className="col-3">{date_of_birth === "0000-00-00" ? null : date_of_birth}</td>
+            <td className="col-3">{date_of_death === "0000-00-00" ? null : date_of_death}</td>
         </Row>
     )
 }

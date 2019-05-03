@@ -21,9 +21,10 @@ class GenreTable extends Component<Props> {
             <Table>
                 <thead>
                     <Row>
-                        <th className="col-4">Name</th>
-                        <th className="col-4">Date of birth</th>
-                        <th className="col-4">Date of death</th>
+                        <th className="col-3">Name</th>
+                        <th className="col-3">Lifespan</th>
+                        <th className="col-3">Date of birth</th>
+                        <th className="col-3">Date of death</th>
                     </Row>
                 </thead>
                 <tbody>
@@ -34,11 +35,13 @@ class GenreTable extends Component<Props> {
                                 id={author.id}
                                 onAuthorClick={() => onAuthorClick(author.id)}
                         
+                                family_name={author.family_name}
+                                first_name={author.first_name}
                                 name={author.name}
-                                lastName={author.lastName}
-                                firstName={author.firstName}
-                                dateOfBirth={author.dateOfBirth}
-                                dateOfDeath={author.dateOfDeath}
+
+                                date_of_birth={author.date_of_birth}
+                                date_of_death={author.date_of_death}
+                                lifespan={author.lifespan}
                             />
                         )
                     })}

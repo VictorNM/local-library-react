@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import Toolbar from './toolbar/AuthorToolbar';
-import Table from './table/AuthorTable';
-import CreateForm from './form/AuthorCreateForm';
+import Table from './table/AuthorTableContainer';
+import CreateForm from './form/AuthorCreateFormContainer';
+import EditForm from './form/AuthorEditForm';
 
 interface Props {
     isGetDetailSucceed: boolean,
@@ -29,13 +30,14 @@ class AuthorPage extends Component<Props, State> {
     }
 
     render() {
-        const { showCreateForm } = this.state
+        const { showCreateForm, showEditForm } = this.state
 
         return (
             <div>
                 <Toolbar onCreateClick={this.showCreateForm}/>
-                <Table authors={[]} onLoad={() => {}} onAuthorClick={() => {}}/>
+                <Table onAuthorClick={this.showEditForm}/>
                 <CreateForm show={showCreateForm} onHide={this.hideCreateForm} />
+                <EditForm show={showEditForm} handleDelete={() => {}} onHide={this.hideEditForm}/>
             </div>
         )
     }
@@ -46,6 +48,14 @@ class AuthorPage extends Component<Props, State> {
 
     hideCreateForm = () => {
         this.setState({ showCreateForm: false })
+    }
+
+    showEditForm = () => {
+        this.setState({ showEditForm: true });
+    }
+
+    hideEditForm = () => {
+        this.setState({ showEditForm: false });
     }
 }
 

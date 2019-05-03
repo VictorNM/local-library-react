@@ -21,7 +21,26 @@ const AuthorCreateForm: React.FC<ModalProps & InjectedFormProps<Author, ModalPro
             btnSubmitDisabled={pristine || submitting}
             btnCancelDisabled={submitting}
         >
-        Author
+            <div className="form-row">
+                <div className="form-group col-6">
+                    <label>Last Name</label>
+                    <Field name="lastName" component="input" className="form-control" />
+                </div>
+                <div className="form-group col-6">
+                    <label>First Name</label>
+                    <Field name="firstName" component="input" className="form-control" />
+                </div>
+            </div>
+            <div className="form-row">
+                <div className="form-group col-6">
+                    <label>Date of birth</label>
+                    <Field name="dateOfBirth" component="input" type="date" className="form-control" />
+                </div>
+                <div className="form-group col-6">
+                    <label>Date of birth</label>
+                    <Field name="dateOfDeath" component="input" type="date" className="form-control" />
+                </div>
+            </div>
         </CreateFormModal>
     )
 }
