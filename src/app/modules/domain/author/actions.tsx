@@ -12,7 +12,7 @@ export default {
         authors
     }),
     getAllAuthorsFailed: (error: any) => ({
-        type: ActionTypes.GET_ALL_AUTHOR_FAILED,
+        type: ActionTypes.GET_ALL_AUTHORS_FAILED,
         error
     }),
     /// === GET AUTHOR DETAIL ===

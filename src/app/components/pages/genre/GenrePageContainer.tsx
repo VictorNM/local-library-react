@@ -12,11 +12,7 @@ const mapStateToProps = (state: rootState) => ({
     isDeleteSucceed: rootSelector.getIsDeleteGenreSucceed(state)
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-
-}
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(GenrePage)

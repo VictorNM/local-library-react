@@ -26,22 +26,33 @@ class AuthorEditForm extends Component<ModalProps & InjectedFormProps<Author, Mo
             >
                 <div className="form-row">
                     <div className="form-group col-6">
-                        <label>Last Name</label>
-                        <Field name="lastName" component="input" className="form-control" />
+                        <label>Name</label>
+                        <Field name="name" component="input" className="form-control" disabled />
                     </div>
                     <div className="form-group col-6">
+                        <label>Lifespan</label>
+                        <Field name="lifespan" component="input" className="form-control" disabled />
+                    </div>
+                </div>
+                <hr/>
+                <div className="form-row">
+                    <div className="form-group col-6">
                         <label>First Name</label>
-                        <Field name="firstName" component="input" className="form-control" />
+                        <Field name="first_name" component="input" className="form-control" />
+                    </div>
+                    <div className="form-group col-6">
+                        <label>Family Name</label>
+                        <Field name="family_name" component="input" className="form-control" />
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-6">
                         <label>Date of birth</label>
-                        <Field name="dateOfBirth" component="input" type="date" className="form-control" />
+                        <Field name="date_of_birth" component="input" type="date" className="form-control" />
                     </div>
                     <div className="form-group col-6">
-                        <label>Date of birth</label>
-                        <Field name="dateOfDeath" component="input" type="date" className="form-control" />
+                        <label>Date of death</label>
+                        <Field name="date_of_death" component="input" type="date" className="form-control" />
                     </div>
                 </div>
             </EditFormModal> 

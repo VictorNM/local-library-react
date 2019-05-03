@@ -12,7 +12,7 @@ export default {
         genres
     }),
     getAllGenresFailed: (error: any) => ({
-        type: ActionTypes.GET_ALL_GENRE_FAILED,
+        type: ActionTypes.GET_ALL_GENRES_FAILED,
         error
     }),
     /// === GET GENRE DETAIL ===

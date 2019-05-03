@@ -69,6 +69,7 @@ class EditFormModal extends Component<Props, State> {
                                 </button>
                             </span>
                         </div>
+                        <hr/>
                         {children}
                     </Modal.Body>
 

@@ -14,12 +14,12 @@ const mapStateToProps = (state: any) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, ownProps: any) => {
     return {
         onLoad: () => dispatch(authorActions.getAllAuthorsAsync()),
-        // onauthorClick(id: number) {
-        //     dispatch(authorActions.getAuthorDetailAsync(id));
-        // }
+        onAuthorClick(id: number) {
+            dispatch(authorActions.getAuthorDetailAsync(id));
+        }
     }
 }
 

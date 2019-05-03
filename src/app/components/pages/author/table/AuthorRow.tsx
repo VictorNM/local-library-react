@@ -16,8 +16,8 @@ const AuthorRow: React.FC<Props> = props => {
         <Row>
             <td className="col-3" onClick={onAuthorClick} style={tdStyle}>{name}</td>
             <td className="col-3">{lifespan}</td>
-            <td className="col-3">{date_of_birth === "0000-00-00" ? null : date_of_birth}</td>
-            <td className="col-3">{date_of_death === "0000-00-00" ? null : date_of_death}</td>
+            <td className="col-3">{date_of_birth}</td>
+            <td className="col-3">{date_of_death}</td>
         </Row>
     )
 }

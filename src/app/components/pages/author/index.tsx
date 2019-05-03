@@ -1,3 +1,3 @@
-import AuthorPage from './AuthorPage';
+import AuthorPage from './AuthorPageContainer';
 
 export default AuthorPage;

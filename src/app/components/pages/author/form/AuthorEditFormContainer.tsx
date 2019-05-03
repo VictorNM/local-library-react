@@ -5,11 +5,12 @@ import { AnyAction } from 'redux';
 import AuthorEditForm from './AuthorEditForm';
 import rootActions from '../../../../modules/rootActions';
 import rootSelector from '../../../../modules/rootSelector';
+import RootState from '../../../../modules/rootState'
 import { Author } from '../../../../../dto';
 
 const authorActions = rootActions.authorActions;
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: RootState, ownProps: any) => {
     return {
         show: ownProps.show,
         initialValues: rootSelector.getCurrentAuthor(state)

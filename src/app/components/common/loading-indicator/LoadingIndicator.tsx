@@ -9,7 +9,7 @@ interface Props {
 const LoadingIndicator: React.FC<Props> = props => {
     const { show } = props;
     return (
-        <Modal show={show} id="loading-indicator" centered backdrop={false}>
+        <Modal show={show} id="loading-indicator" centered>
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
                     <span className="sr-only">Loading...</span>

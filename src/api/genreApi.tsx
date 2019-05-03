@@ -1,18 +1,5 @@
-import axios from 'axios';
+import { axiosPost } from './utils';
 import { Genre } from '../dto';
-
-const ENDPOINT = "http://localhost:8000/graphql/v1";
-
-function axiosPost(query: string, variables: any = {}) {
-    return axios({
-        method: "post",
-        url: ENDPOINT,
-        data: {
-            query,
-            variables
-        }
-    })
-}
 
 export function getGenreList() {
     const query =

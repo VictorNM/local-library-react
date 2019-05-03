@@ -8,7 +8,7 @@ export default {
     /// === AUTHOR SELECTOR ===
     getAllAuthors: (state: rootState) =>
         authorSelector.getAllAuthors(state.author),
-    getCurrentAuthor: (state: rootState) =>
+    getCurrentAuthor: (state: rootState) => 
         authorSelector.getCurrentAuthor(state.author),
 
     /// === GENRE SELECTORS ===
@@ -24,6 +24,18 @@ export default {
 
     getError: (state: rootState) =>
         appSelector.getError(state.app),
+
+    getIsGetAuthorDetailSucceed: (state: rootState) =>
+        appSelector.getIsGetAuthorDetailSucceed(state.app),
+
+    getIsCreateAuthorSucceed: (state: rootState) =>
+        appSelector.getIsCreateAuthorSucceed(state.app),
+
+    getIsUpdateAuthorSucceed: (state: rootState) =>
+        appSelector.getIsUpdateAuthorSucceed(state.app),
+
+    getIsDeleteAuthorSucceed: (state: rootState) =>
+        appSelector.getIsDeleteAuthorSucceed(state.app),
 
     getIsGetGenreDetailSucceed: (state: rootState) =>
         appSelector.getIsGetGenreDetailSucceed(state.app),
