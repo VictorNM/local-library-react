@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import { AuthorPage, GenrePage } from '../../pages';
+import { BookPage, AuthorPage, GenrePage } from '../../pages';
 import LoadingIndicator from '../../common/loading-indicator/LoadingIndicatorContainer';
 import ErrorModal from '../../common/error-modal/ErrorModalContainer';
 
@@ -12,6 +12,7 @@ class Main extends Component {
     render() {
         return (
             <main>
+                <Route path='/book' component={BookPage} />
                 <Route path='/author' component={AuthorPage} />
                 <Route path='/genre' component={GenrePage} />
                 <LoadingIndicator />

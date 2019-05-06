@@ -21,6 +21,20 @@ export function getAuthorList() {
     return axiosPost(query);
 }
 
+export function getAuthorListMinimal() {
+    const query =
+        `
+        query {
+            authors {
+                id
+                name
+            }
+        }
+        `
+
+    return axiosPost(query);
+}
+
 export function getAuthorDetail(id: number) {
     const query =
     `

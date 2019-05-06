@@ -1,15 +1,24 @@
 import rootState from './rootState';
 
+import { selector as bookSelector } from './domain/book';
 import { selector as authorSelector } from './domain/author';
 import { selector as genreSelector } from './domain/genre';
 import { selector as appSelector } from './app';
 
 export default {
+    /// === BOOK SELECTOR ===
+    getAllBooks: (state: rootState) =>
+        bookSelector.getAllBooks(state.book),
+    getCurrentBook: (state: rootState) =>
+        bookSelector.getCurrentBook(state.book),
+
     /// === AUTHOR SELECTOR ===
     getAllAuthors: (state: rootState) =>
         authorSelector.getAllAuthors(state.author),
-    getCurrentAuthor: (state: rootState) => 
+    getCurrentAuthor: (state: rootState) =>
         authorSelector.getCurrentAuthor(state.author),
+    getAllAuthorsWithIdAndName: (state: rootState) =>
+        authorSelector.getAllAuthorsWithIdAndName(state.author),
 
     /// === GENRE SELECTORS ===
     getAllGenres: (state: rootState) =>
@@ -24,6 +33,18 @@ export default {
 
     getError: (state: rootState) =>
         appSelector.getError(state.app),
+
+    getIsGetBookDetailSucceed: (state: rootState) =>
+        appSelector.getIsGetBookDetailSucceed(state.app),
+
+    getIsCreateBookSucceed: (state: rootState) =>
+        appSelector.getIsCreateBookSucceed(state.app),
+
+    getIsUpdateBookSucceed: (state: rootState) =>
+        appSelector.getIsUpdateBookSucceed(state.app),
+
+    getIsDeleteBookSucceed: (state: rootState) =>
+        appSelector.getIsDeleteBookSucceed(state.app),
 
     getIsGetAuthorDetailSucceed: (state: rootState) =>
         appSelector.getIsGetAuthorDetailSucceed(state.app),

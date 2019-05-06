@@ -6,6 +6,15 @@ export default {
     getIsLoading:   (state: State) => state.global.isLoading,
     getError:       (state: State) => state.global.error,
 
+    getIsGetBookDetailSucceed: (state: State) =>
+        state.book.isGetDetailSucceed,
+    getIsCreateBookSucceed: (state: State) =>
+        state.book.isCreateSucceed,
+    getIsUpdateBookSucceed: (state: State) =>
+        state.book.isUpdateSucceed,
+    getIsDeleteBookSucceed: (state: State) =>
+        state.book.isDeleteSucceed,
+
     getIsGetAuthorDetailSucceed: (state: State) =>
         state.author.isGetDetailSucceed,
     getIsCreateAuthorSucceed: (state: State) =>

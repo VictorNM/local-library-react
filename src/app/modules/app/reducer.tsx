@@ -2,6 +2,7 @@ import { combineReducers, AnyAction } from "redux";
 
 import authorActionTypes from '../domain/author/action-types';
 import genreActionTypes from '../domain/genre/action-types';
+import bookReducer from './book/reducer';
 import authorReducer from './author/reducer';
 import genreReducer from './genre/reducer';
 
@@ -57,6 +58,7 @@ const globalReducer = (state = initialState, action: AnyAction) => {
 }
 
 export default combineReducers({
+    book: bookReducer,
     author: authorReducer,
     genre: genreReducer,
     global: globalReducer

@@ -13,3 +13,12 @@ export interface Author {
     name: string,
     lifespan: number
 }
+
+export interface Book {
+    id: number,
+    title: string,
+    author: Author,
+    summary: string,
+    isbn: string,
+    genres: Genre[]
+}
