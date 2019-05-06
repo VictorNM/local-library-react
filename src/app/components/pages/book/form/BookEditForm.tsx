@@ -7,13 +7,13 @@ import { Book } from '../../../../../dto';
 interface ModalProps {
     show: boolean,
     authors: {id: number, name: string}[],
-    // handleDelete: (id: number) => void,
+    handleDelete: (id: number) => void,
     onHide: () => void
 }
 
 class BookEditForm extends Component<ModalProps & InjectedFormProps<Book, ModalProps>> {
     render() {
-        const { initialValues, show, handleSubmit, onHide, pristine, submitting } = this.props
+        const { initialValues, show, handleSubmit, handleDelete, onHide, pristine, submitting } = this.props
         const current_author = initialValues ? initialValues.author : null
         const current_genres = initialValues ? initialValues.genres : null
 
@@ -22,7 +22,7 @@ class BookEditForm extends Component<ModalProps & InjectedFormProps<Book, ModalP
                 title="Book"
                 show={show}
                 onSubmit={handleSubmit}
-                onDelete={handleSubmit(() => { })}
+                onDelete={handleSubmit(values => handleDelete(values.id))}
                 onHide={onHide}
                 btnSubmitDisabled={pristine || submitting}
                 btnCancelDisable={submitting}
@@ -36,8 +36,7 @@ class BookEditForm extends Component<ModalProps & InjectedFormProps<Book, ModalP
                     </div>
                     <div className="form-group col-6">
                         <label>Author</label>
-                        <div>
-                            
+                        <div>                            
                             <Field name="author.id" component="select" className="form-control">
                                 <option value={current_author ? current_author.id : undefined}>{current_author ? current_author.name : null}</option>
                                 {this.props.authors.map(author => {

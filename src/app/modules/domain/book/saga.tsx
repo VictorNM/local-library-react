@@ -3,6 +3,7 @@ import { AnyAction } from "redux";
 
 import actionTypes from './action-types';
 import actions from './actions';
+import { actions as authorActions } from '../author';
 import { bookApi } from '../../../../api';
 import { Book } from '../../../../dto';
 
@@ -12,7 +13,7 @@ export function* saga() {
         takeLatest(actionTypes.GET_BOOK_DETAIL_ASYNC, getBookDetailSaga),
         // takeLatest(actionTypes.CREATE_BOOK_ASYNC, createBookSaga),
         takeLatest(actionTypes.UPDATE_BOOK_ASYNC, updateBookSaga),
-        // takeLatest(actionTypes.DELETE_BOOK_ASYNC, deleteBookSaga)
+        takeLatest(actionTypes.DELETE_BOOK_ASYNC, deleteBookSaga)
     ]);
 }
 
@@ -31,11 +32,13 @@ function* getAllBooksSaga() {
 
 function* getBookDetailSaga(action: AnyAction) {
     try {
-        const response = yield call(bookApi.getBookDetail, action.id)
+        const response = yield call(bookApi.getBookDetailWithAuthorList, action.id)
         checkServerError(response)
         
         const book: Book = response.data.data.book
+        const authors = response.data.data.authors
         yield put(actions.getBookDetailSucceed(book))
+        yield put(authorActions.getAllAuthorsSucceed(authors))
     } catch (error) {
         yield put(actions.getAllBooksFailed(error))
     }
@@ -52,6 +55,18 @@ function* updateBookSaga(action: AnyAction) {
         yield put(actions.updateBookFailed(error))
     }
 }
+
+function* deleteBookSaga(action: AnyAction) {
+    try {
+        const response = yield call(bookApi.deleteBook, action.id);
+        checkServerError(response)
+
+        const id: number = response.data.data.deleteBook;
+        yield put(actions.deleteBookSucceed(id));
+    } catch (error) {
+        yield put(actions.deleteBookFailed(error));
+    }
+}
 /*
 
 function* createBookSaga(action: AnyAction) {
@@ -63,18 +78,6 @@ function* createBookSaga(action: AnyAction) {
         yield put(actions.createBookSucceed(book))
     } catch (error) {
         yield put(actions.createBookFailed(error))
-    }
-}
-
-function* deleteBookSaga(action: AnyAction) {
-    try {
-        const response = yield call(bookApi.deleteBook, action.id);
-        checkServerError(response)
-
-        const id: number = response.data.data.deleteBook;
-        yield put(actions.deleteBookSucceed(id));
-    } catch (error) {
-        yield put(actions.deleteBookFailed(error));
     }
 }
 */

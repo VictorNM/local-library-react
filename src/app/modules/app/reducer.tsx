@@ -1,5 +1,6 @@
 import { combineReducers, AnyAction } from "redux";
 
+import bookActionTypes from '../domain/book/action-types';
 import authorActionTypes from '../domain/author/action-types';
 import genreActionTypes from '../domain/genre/action-types';
 import bookReducer from './book/reducer';
@@ -13,6 +14,11 @@ const initialState = {
 
 const globalReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
+        case bookActionTypes.GET_ALL_BOOKS_ASYNC:
+        case bookActionTypes.GET_BOOK_DETAIL_ASYNC:
+        case bookActionTypes.CREATE_BOOK_ASYNC:
+        case bookActionTypes.UPDATE_BOOK_ASYNC:
+        case bookActionTypes.DELETE_BOOK_ASYNC:
         case authorActionTypes.GET_ALL_AUTHORS_ASYNC:
         case authorActionTypes.GET_AUTHOR_DETAIL_ASYNC:
         case authorActionTypes.CREATE_AUTHOR_ASYNC:
@@ -25,6 +31,11 @@ const globalReducer = (state = initialState, action: AnyAction) => {
         case genreActionTypes.DELETE_GENRE_ASYNC:
             return {isLoading: true, error: null}
 
+        case bookActionTypes.GET_ALL_BOOKS_SUCCEED:
+        case bookActionTypes.GET_BOOK_DETAIL_SUCCEED:
+        case bookActionTypes.CREATE_BOOK_SUCCEED:
+        case bookActionTypes.UPDATE_BOOK_SUCCEED:
+        case bookActionTypes.DELETE_BOOK_SUCCEED:
         case authorActionTypes.GET_ALL_AUTHORS_SUCCEED:
         case authorActionTypes.GET_AUTHOR_DETAIL_SUCCEED:
         case authorActionTypes.CREATE_AUTHOR_SUCCEED:
@@ -37,6 +48,11 @@ const globalReducer = (state = initialState, action: AnyAction) => {
         case genreActionTypes.DELETE_GENRE_SUCCEED:
             return {isLoading: false, error: null}
 
+        case bookActionTypes.GET_ALL_BOOKS_FAILED:
+        case bookActionTypes.GET_BOOK_DETAIL_FAILED:
+        case bookActionTypes.CREATE_BOOK_FAILED:
+        case bookActionTypes.UPDATE_BOOK_FAILED:
+        case bookActionTypes.DELETE_BOOK_FAILED:
         case authorActionTypes.GET_ALL_AUTHORS_FAILED:
         case authorActionTypes.GET_AUTHOR_DETAIL_FAILED:
         case authorActionTypes.CREATE_AUTHOR_FAILED:

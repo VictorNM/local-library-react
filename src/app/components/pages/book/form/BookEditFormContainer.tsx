@@ -25,9 +25,9 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, ownProps: any) => {
             ownProps.onHide();
             dispatch(bookActions.clearCurrentBook());
         },
-        // handleDelete(id: number) {
-        //     dispatch(bookActions.deleteBookAsync(id))
-        // }
+        handleDelete(id: number) {
+            dispatch(bookActions.deleteBookAsync(id))
+        }
     }
 }
 

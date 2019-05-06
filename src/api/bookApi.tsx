@@ -50,6 +50,37 @@ export const getBookDetail = (id: number) => {
     return axiosPost(query, variables);
 }
 
+export const getBookDetailWithAuthorList = (id: number) => {
+    const query =
+        `
+        query RetrieveBookById($id: Int!) {
+            book(id: $id) {
+                id
+                title
+                author {
+                    id
+                    name
+                }
+                summary
+                isbn
+                genres {
+                    id
+                    name
+                }
+            }
+            authors {
+                id
+                name
+            }
+        }
+        `
+    const variables = {
+        id: id
+    }
+
+    return axiosPost(query, variables);
+}
+
 export const updateBook = (id: number, book: Book) => {
     const query =
         `
@@ -95,6 +126,23 @@ export const updateBook = (id: number, book: Book) => {
     
     return axiosPost(query, variables);
 }
+
+export function deleteBook(id: number) {
+    const query =
+    `
+    mutation DeleteBook(
+        $id: Int!
+      ) {
+        deleteBook(id: $id)
+      }
+    `
+
+    const variables = {
+        id
+    }
+
+    return axiosPost(query, variables)
+}
 /** 
 export const createBook = (Book: Book) => {
     const query =
@@ -114,22 +162,5 @@ export const createBook = (Book: Book) => {
     }
 
     return axiosPost(query, variables);
-}
-
-export function deleteBook(id: number) {
-    const query =
-    `
-    mutation DeleteBook(
-        $id: Int!
-      ) {
-        deleteBook(id: $id)
-      }
-    `
-
-    const variables = {
-        id
-    }
-
-    return axiosPost(query, variables)
 }
 */
