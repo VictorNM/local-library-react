@@ -40,23 +40,18 @@ const AuthorSelect = (props: any) => {
         }
     }
 
-    const currentOptionIdx = props.authors.findIndex(
-        (author: Author) => {
-            const currentId = props.currentAuthor ? props.currentAuthor.id : null
-            return author.id === currentId
-        }
-    )
-
     const options = props.authors.map((author: Author) => ({
         value: author.id,
         label: author.name
     }))
 
+    const currentOption = props.currentAuthor ? {value: props.currentAuthor.id, label: props.currentAuthor.name} : null
+
     return (
         <Select 
             options={options}
             onChange={onChange}
-            defaultValue={currentOptionIdx >= 0 ? options[currentOptionIdx]: null}
+            defaultValue={currentOption}
         />
     )
 }
@@ -80,24 +75,17 @@ const GenresSelect = (props: any) => {
         }
     }
 
-    const currentIndexes = () => {
-        const currentGenresId = props.currentGenres ? props.currentGenres.map((genre : any) => genre.id) : []
-        const currentIndexes = currentGenresId.map((id : number) =>
-            props.genres.findIndex(
-                (genre : Genre) => {
-                    const currentId = genre.id
-                    return id === currentId
-                }
-            ))
-        return currentIndexes
-    }
+    const currentOptions = props.currentGenres ? props.currentGenres.map((genre : any) => ({
+        value: genre.id,
+        label: genre.name
+    })) : []
 
     return (
         <Select 
             options={options}
             isMulti
             onChange={onChange}
-            defaultValue={currentIndexes().map((i : number) => options[i])}
+            defaultValue={currentOptions}
         />
     )
 }
