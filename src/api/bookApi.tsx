@@ -18,6 +18,14 @@ export function getBookList() {
                 }
                 isbn
             }
+            authors {
+                id
+                name
+            }
+            genres {
+                id
+                name
+            }
         }`
 
     return axiosPost(query);
@@ -40,37 +48,6 @@ export const getBookDetail = (id: number) => {
                     id
                     name
                 }
-            }
-        }
-        `
-    const variables = {
-        id: id
-    }
-
-    return axiosPost(query, variables);
-}
-
-export const getBookDetailWithAuthorList = (id: number) => {
-    const query =
-        `
-        query RetrieveBookById($id: Int!) {
-            book(id: $id) {
-                id
-                title
-                author {
-                    id
-                    name
-                }
-                summary
-                isbn
-                genres {
-                    id
-                    name
-                }
-            }
-            authors {
-                id
-                name
             }
         }
         `
@@ -121,7 +98,8 @@ export const updateBook = (id: number, book: Book) => {
         title: book.title,
         author_id: book.author.id,
         summary: book.summary,
-        isbn: book.isbn
+        isbn: book.isbn,
+        genre_ids: book.genres.map(genre => genre.id)
     }
     
     return axiosPost(query, variables);

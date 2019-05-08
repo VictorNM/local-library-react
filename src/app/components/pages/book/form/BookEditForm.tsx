@@ -1,21 +1,119 @@
 import React, { Component } from 'react';
-import { reduxForm, InjectedFormProps, Field, getFormInitialValues } from 'redux-form';
+import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import Select from 'react-select';
 
 import { EditFormModal } from '../../../template'
 import { Book } from '../../../../../dto';
 
+interface Author {
+    id: number,
+    name: string
+}
+
+interface Genre {
+    id: number,
+    name: string
+}
+
 interface ModalProps {
     show: boolean,
-    authors: {id: number, name: string}[],
     handleDelete: (id: number) => void,
     onHide: () => void
 }
 
-class BookEditForm extends Component<ModalProps & InjectedFormProps<Book, ModalProps>> {
+interface Props {    
+    authors: Author[],
+    genres: Genre[],
+}
+
+const AuthorSelect = (props: any) => {
+
+    const onChange = (event: any) => {
+        if (props.input.onChange && event != null) {
+            props.input.onChange({
+                id: event.value,
+                name: event.label
+            })
+        }
+        else {
+            props.input.onChange(null)
+        }
+    }
+
+    const currentOptionIdx = props.authors.findIndex(
+        (author: Author) => {
+            const currentId = props.currentAuthor ? props.currentAuthor.id : null
+            return author.id === currentId
+        }
+    )
+
+    const options = props.authors.map((author: Author) => ({
+        value: author.id,
+        label: author.name
+    }))
+
+    return (
+        <Select 
+            options={options}
+            onChange={onChange}
+            defaultValue={currentOptionIdx >= 0 ? options[currentOptionIdx]: null}
+        />
+    )
+}
+
+const GenresSelect = (props: any) => {
+    const options = props.genres.map((genre: Genre) => ({
+        value: genre.id,
+        label: genre.name
+    }))
+
+    const onChange = (event: any) => {
+        console.log(event)
+        if (props.input.onChange && event != null) {
+            props.input.onChange(event.map((option: any) => ({
+                id: option.value,
+                name: option.label
+            })))
+        }
+        else {
+            props.input.onChange(null)
+        }
+    }
+
+    const currentIndexes = () => {
+        const currentGenresId = props.currentGenres ? props.currentGenres.map((genre : any) => genre.id) : []
+        const currentIndexes = currentGenresId.map((id : number) =>
+            props.genres.findIndex(
+                (genre : Genre) => {
+                    const currentId = genre.id
+                    return id === currentId
+                }
+            ))
+        return currentIndexes
+    }
+
+    return (
+        <Select 
+            options={options}
+            isMulti
+            onChange={onChange}
+            defaultValue={currentIndexes().map((i : number) => options[i])}
+        />
+    )
+}
+
+class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book, Props & ModalProps>> {
+    getAuthorOptions() {
+        return this.props.authors.map(author => ({
+            value: author.id,
+            label: author.name
+        }))
+    }
+
     render() {
         const { initialValues, show, handleSubmit, handleDelete, onHide, pristine, submitting } = this.props
-        const current_author = initialValues ? initialValues.author : null
-        const current_genres = initialValues ? initialValues.genres : null
+        const currentAuthor = initialValues ? initialValues.author : null
+        const currentGenres = initialValues ? initialValues.genres : null
 
         return (
             <EditFormModal
@@ -28,45 +126,44 @@ class BookEditForm extends Component<ModalProps & InjectedFormProps<Book, ModalP
                 btnCancelDisable={submitting}
             >
                 <div className="form-row">
-                    <div className="form-group col-6">
+                    <div className="form-group col-12">
                         <label>Title</label>
                         <div>
                             <Field name="title" component="input" className="form-control" />
                         </div>
                     </div>
+                </div>
+                <div className="form-row">
                     <div className="form-group col-6">
                         <label>Author</label>
                         <div>                            
-                            <Field name="author.id" component="select" className="form-control">
-                                <option value={current_author ? current_author.id : undefined}>{current_author ? current_author.name : null}</option>
-                                {this.props.authors.map(author => {
-                                    if (current_author && author.id === current_author.id) {
-                                        return null;
-                                    }
-                                    return (
-                                        <option key={author.id} value={author.id}>{author.name}</option>
-                                    )                                    
-                                })}
-                            </Field>
+                            <Field 
+                                name="author" 
+                                component={AuthorSelect} 
+                                authors={this.props.authors}
+                                currentAuthor={currentAuthor}
+                                className="form-control"
+                            />
                         </div>
                     </div>
-                </div>
-                <div className="form-row">
                     <div className="form-group col-6">
                         <label>ISBN</label>
                         <div>
                             <Field name="isbn" component="input" className="form-control" />
                         </div>
                     </div>
-                    <div className="form-group col-6">
+                </div>
+                <div className="form-row">                    
+                    <div className="form-group col-12">
                         <label>Genres</label>
                         <div>
-                            <Field name="genres" component="select" multiple className="form-control">
-                                <option 
-                                    value={current_genres ? (current_genres[0] ? current_genres[0].id : undefined) : undefined}>
-                                        {current_genres ? (current_genres[0] ? current_genres[0].name : null) : null}
-                                </option>
-                            </Field>
+                            <Field 
+                                name="genres"
+                                component={GenresSelect}
+                                genres={this.props.genres}
+                                currentGenres={currentGenres}
+                                className="form-control" 
+                            />
                         </div>
                     </div>
                 </div>
@@ -84,7 +181,7 @@ class BookEditForm extends Component<ModalProps & InjectedFormProps<Book, ModalP
     }
 }
 
-export default reduxForm<Book, ModalProps>({
+export default reduxForm<Book, Props & ModalProps>({
     form: 'bookEditForm',
     enableReinitialize: true
 })(BookEditForm)

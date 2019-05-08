@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import GenrePage from './GenrePage';
 import rootState from '../../../modules/rootState';

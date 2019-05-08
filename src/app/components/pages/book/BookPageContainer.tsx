@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import BookPage from './BookPage';
 import rootState from '../../../modules/rootState';
