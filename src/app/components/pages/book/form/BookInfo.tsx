@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import { Field } from 'redux-form';
 
-import { EditFormModal } from '../../../template'
 import { Book } from '../../../../../dto';
 import AuthorSelect from './AuthorSelect';
 import GenresSelect from './GenresSelect';
@@ -17,7 +16,7 @@ interface Genre {
 }
 
 interface Props {
-    currentBook: any,
+    currentBook: Book | Partial<Book> | null,
     authors: Author[],
     genres: Genre[],
 }
