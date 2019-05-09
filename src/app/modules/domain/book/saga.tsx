@@ -12,7 +12,7 @@ export function* saga() {
     yield all([
         takeLatest(actionTypes.GET_ALL_BOOKS_ASYNC, getAllBooksSaga),
         takeLatest(actionTypes.GET_BOOK_DETAIL_ASYNC, getBookDetailSaga),
-        // takeLatest(actionTypes.CREATE_BOOK_ASYNC, createBookSaga),
+        takeLatest(actionTypes.CREATE_BOOK_ASYNC, createBookSaga),
         takeLatest(actionTypes.UPDATE_BOOK_ASYNC, updateBookSaga),
         takeLatest(actionTypes.DELETE_BOOK_ASYNC, deleteBookSaga)
     ]);
@@ -48,6 +48,18 @@ function* getBookDetailSaga(action: AnyAction) {
     }
 }
 
+function* createBookSaga(action: AnyAction) {
+    try {
+        const response = yield call(bookApi.createBook, action.book)
+        checkServerError(response)
+
+        const book: Book = response.data.data.newBook
+        yield put(actions.createBookSucceed(book))
+    } catch (error) {
+        yield put(actions.createBookFailed(error))
+    }
+}
+
 function* updateBookSaga(action: AnyAction) {
     try {
         const response = yield call(bookApi.updateBook, action.book.id, action.book);
@@ -72,18 +84,6 @@ function* deleteBookSaga(action: AnyAction) {
     }
 }
 /*
-
-function* createBookSaga(action: AnyAction) {
-    try {
-        const response = yield call(bookApi.createBook, action.book)
-        checkServerError(response)
-
-        const book: Book = response.data.data.newBook
-        yield put(actions.createBookSucceed(book))
-    } catch (error) {
-        yield put(actions.createBookFailed(error))
-    }
-}
 */
 
 function checkServerError(response: any) {

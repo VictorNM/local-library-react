@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
-import { EditFormModal } from '../../../template'
+import { CreateFormModal } from '../../../template'
 import { Book } from '../../../../../dto';
 import AuthorSelect from './AuthorSelect';
 import GenresSelect from './GenresSelect';
@@ -18,7 +18,6 @@ interface Genre {
 
 interface ModalProps {
     show: boolean,
-    handleDelete: (id: number) => void,
     onHide: () => void
 }
 
@@ -28,7 +27,7 @@ interface Props {
 }
 
 
-class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book, Props & ModalProps>> {
+class BookCreateForm extends Component<Props & ModalProps & InjectedFormProps<Book, Props & ModalProps>> {
     getAuthorOptions() {
         return this.props.authors.map(author => ({
             value: author.id,
@@ -37,19 +36,18 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
     }
 
     render() {
-        const { initialValues, show, handleSubmit, handleDelete, onHide, pristine, submitting } = this.props
+        const { initialValues, show, handleSubmit, onHide, pristine, submitting } = this.props
         const currentAuthor = initialValues ? initialValues.author : null
         const currentGenres = initialValues ? initialValues.genres : null
 
         return (
-            <EditFormModal
+            <CreateFormModal
                 title="Book"
                 show={show}
                 onSubmit={handleSubmit}
-                onDelete={handleSubmit(values => handleDelete(values.id))}
                 onHide={onHide}
                 btnSubmitDisabled={pristine || submitting}
-                btnCancelDisable={submitting}
+                btnCancelDisabled={submitting}
             >
                 <div className="form-row">
                     <div className="form-group col-12">
@@ -102,7 +100,7 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
                     </div>
                 </div>
 
-            </EditFormModal>
+            </CreateFormModal>
         )
     }
 }
@@ -110,4 +108,4 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
 export default reduxForm<Book, Props & ModalProps>({
     form: 'bookEditForm',
     enableReinitialize: true
-})(BookEditForm)
+})(BookCreateForm)

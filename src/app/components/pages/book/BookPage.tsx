@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import Toolbar from './toolbar/BookToolbar';
-// import CreateForm from './form/BookCreateFormContainer';
+import Toolbar from './toolbar/BookToolbar';
+import CreateForm from './form/BookCreateFormContainer';
 import EditForm from './form/BookEditFormContainer';
 import Table from './table/BookTableContainer';
 import SuccessModal from '../../common/success-modal';
@@ -41,9 +41,9 @@ class BookPage extends Component<Props, State> {
 
         return (
             <div>
-                {/* <Toolbar onCreateClick={this.showCreateForm}/> */}
+                <Toolbar onCreateClick={this.showCreateForm}/>
                 <Table />
-                {/* <CreateForm show={showCreateForm} onHide={this.hideCreateForm}/> */}
+                <CreateForm show={showCreateForm} onHide={this.hideCreateForm}/>
                 <EditForm show={showEditForm} onHide={this.hideEditForm} />
                 { successMessage ? <SuccessModal show={true} message={successMessage} onHide={this.clearSuccessMessage} /> : null }
             </div>

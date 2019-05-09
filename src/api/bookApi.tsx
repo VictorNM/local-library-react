@@ -58,6 +58,49 @@ export const getBookDetail = (id: number) => {
     return axiosPost(query, variables);
 }
 
+export const createBook = (book: Book) => {
+    const query =
+        `
+        mutation CreateBook(
+            $title: String!,
+            $author_id: Int!,
+            $summary: String,
+            $isbn: String,
+            $genre_ids: [Int]
+        ) {
+            newBook(
+                title: $title,
+                author_id: $author_id,
+                summary: $summary,
+                isbn: $isbn,
+                genre_ids: $genre_ids
+            ) {
+                id
+                title
+                author {
+                    id
+                    name
+                }
+                summary
+                isbn
+                genres {
+                    id
+                    name
+                }
+            }
+        }
+        `
+    const variables = {
+        title: book.title,
+        author_id: book.author.id,
+        summary: book.summary,
+        isbn: book.isbn,
+        genre_ids: book.genres ? book.genres.map(genre => genre.id) : []
+    }
+
+    return axiosPost(query, variables);
+}
+
 export const updateBook = (id: number, book: Book) => {
     const query =
         `
@@ -99,15 +142,15 @@ export const updateBook = (id: number, book: Book) => {
         author_id: book.author.id,
         summary: book.summary,
         isbn: book.isbn,
-        genre_ids: book.genres.map(genre => genre.id)
+        genre_ids: book.genres ? book.genres.map(genre => genre.id) : []
     }
-    
+
     return axiosPost(query, variables);
 }
 
 export function deleteBook(id: number) {
     const query =
-    `
+        `
     mutation DeleteBook(
         $id: Int!
       ) {
@@ -121,24 +164,5 @@ export function deleteBook(id: number) {
 
     return axiosPost(query, variables)
 }
-/** 
-export const createBook = (Book: Book) => {
-    const query =
-        `mutation CreateBook(
-            $name: String!
-        ) {
-            newBook(
-                name: $name
-            ) {
-                id
-                name
-            }
-        }
-        `
-    const variables = {
-        name: Book.title,
-    }
-
-    return axiosPost(query, variables);
-}
+/**
 */
