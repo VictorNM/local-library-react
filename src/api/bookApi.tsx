@@ -48,6 +48,11 @@ export const getBookDetail = (id: number) => {
                     id
                     name
                 }
+                bookInstances {
+                  id
+                  status
+                  due_back
+                }
             }
         }
         `

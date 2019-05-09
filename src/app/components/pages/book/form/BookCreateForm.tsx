@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { reduxForm, InjectedFormProps } from 'redux-form';
-import { Tabs, Tab } from 'react-bootstrap';
 
 import { CreateFormModal } from '../../../template'
 import { Book } from '../../../../../dto';
-import BookInfo from './BookInfo';
-import BookInstances from './BookIntances';
+import BookDetail from './BookDetail';
 
 interface Author {
     id: number,
@@ -30,7 +28,7 @@ interface Props {
 
 class BookCreateForm extends Component<Props & ModalProps & InjectedFormProps<Book, Props & ModalProps>> {
     render() {
-        const { initialValues, show, handleSubmit, onHide, pristine, submitting } = this.props
+        const { show, handleSubmit, onHide, pristine, submitting } = this.props
 
         return (
             <CreateFormModal
@@ -41,20 +39,11 @@ class BookCreateForm extends Component<Props & ModalProps & InjectedFormProps<Bo
                 btnSubmitDisabled={pristine || submitting}
                 btnCancelDisabled={submitting}
             >
-                <Tabs defaultActiveKey="info" id="book-tab" className="mb-3">
-                    <Tab eventKey="info" title="Book Info">
-                        <BookInfo
-                            currentBook={null}
-                            authors={this.props.authors}
-                            genres={this.props.genres}
-                        />
-                    </Tab>
-                    <Tab eventKey="book-intances" title="Book Instances">
-                        <BookInstances
-                            currentBook={initialValues}
-                        />
-                    </Tab>
-                </Tabs>
+                <BookDetail
+                    currentBook={null}
+                    authors={this.props.authors}
+                    genres={this.props.genres}
+                />
 
             </CreateFormModal>
         )

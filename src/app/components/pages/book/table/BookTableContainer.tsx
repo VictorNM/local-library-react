@@ -7,6 +7,7 @@ import rootActions from '../../../../modules/rootActions';
 import rootSelector from '../../../../modules/rootSelector';
 
 const bookActions = rootActions.bookActions
+const authorActions = rootActions.authorActions
 
 const mapStateToProps = (state: any) => {
     return {
@@ -19,6 +20,9 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
         onLoad: () => dispatch(bookActions.getAllBooksAsync()),
         onBookClick(id: number) {
             dispatch(bookActions.getBookDetailAsync(id));
+        },
+        onAuthorClick(authorId: number) {
+            dispatch(authorActions.getAuthorDetailAsync(authorId))
         }
     }
 }

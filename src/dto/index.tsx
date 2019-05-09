@@ -20,5 +20,12 @@ export interface Book {
     author: Author,
     summary: string,
     isbn: string,
-    genres: Genre[]
+    genres: Genre[],
+    bookInstances: BookInstance[]
+}
+
+export interface BookInstance {
+    id: number,
+    status: string,
+    due_back: string
 }

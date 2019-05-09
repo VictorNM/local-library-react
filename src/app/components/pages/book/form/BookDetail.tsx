@@ -22,7 +22,7 @@ interface Props {
 }
 
 
-class BookInfo extends Component<Props> {
+class BookDetail extends Component<Props> {
     render() {
         const { currentBook } = this.props
         const currentAuthor = currentBook ? currentBook.author : null
@@ -31,10 +31,16 @@ class BookInfo extends Component<Props> {
         return (
             <>
                 <div className="form-row">
-                    <div className="form-group col-12">
+                    <div className="form-group col-10">
                         <label>Title</label>
                         <div>
                             <Field name="title" component="input" className="form-control" />
+                        </div>
+                    </div>
+                    <div className="form-group col-2">
+                        <label>Instances</label>
+                        <div>
+                            <input type="number" className="form-control"></input>
                         </div>
                     </div>
                 </div>
@@ -85,4 +91,4 @@ class BookInfo extends Component<Props> {
         )
     }
 }
-export default BookInfo;
+export default BookDetail;

@@ -8,11 +8,12 @@ import rootSelector from '../../../../modules/rootSelector';
 import { Genre } from '../../../../../dto';
 
 const genreActions = rootActions.genreActions;
+const bookActions = rootActions.bookActions;
 
 const mapStateToProps = (state: any, ownProps: any) => {
     return {
         show: ownProps.show,
-        initialValues: rootSelector.getCurrentGenre(state)
+        initialValues: rootSelector.getCurrentGenre(state),
     }
 }
 
@@ -25,6 +26,9 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, ownProps: any) => {
         },
         handleDelete(id: number) {
             dispatch(genreActions.deleteGenreAsync(id))
+        },
+        onBookClick(bookId: number) {
+            dispatch(bookActions.getBookDetailAsync(bookId));
         }
     }
 }

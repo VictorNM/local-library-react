@@ -7,7 +7,8 @@ import { Book } from '../../../../../dto';
 interface Props {
     books: Book[],
     onLoad: () => void,
-    onBookClick: (id: number) => void
+    onBookClick: (id: number) => void,
+    onAuthorClick: (authorId: number) => void
 }
 
 class BookTable extends Component<Props> {
@@ -29,14 +30,16 @@ class BookTable extends Component<Props> {
                 <tbody>
                     {books.map((book) => {
                         const onBookClick = () => this.props.onBookClick(book.id)
+                        const onAuthorClick = () => book.author ? this.props.onAuthorClick(book.author.id) : undefined
                         return (
                             <BookRow 
                                 key={book.id}
                                 onBookClick={onBookClick}
+                                onAuthorClick={onAuthorClick}
                         
                                 title={book.title}
                                 author_name={book.author ? book.author.name : ''}
-                                summary={book.summary}
+                                summary={book.summary}                                
                             />
                         )
                     })}

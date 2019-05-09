@@ -3,9 +3,9 @@ import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 import { Tabs, Tab } from 'react-bootstrap';
 
 import { EditFormModal } from '../../../template'
-import { Book } from '../../../../../dto';
-import BookInfo from './BookInfo';
-import BookInstances from './BookIntances';
+import { Book, BookInstance } from '../../../../../dto';
+import BookDetail from './BookDetail';
+import BookInstanceTable from './BookInstanceTable';
 
 
 interface Author {
@@ -29,7 +29,6 @@ interface Props {
     genres: Genre[],
 }
 
-
 class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book, Props & ModalProps>> {
     getAuthorOptions() {
         return this.props.authors.map(author => ({
@@ -40,6 +39,7 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
 
     render() {
         const { initialValues, show, handleSubmit, handleDelete, onHide, pristine, submitting } = this.props
+        const bookInstances : BookInstance[] = initialValues ? (initialValues.bookInstances ? initialValues.bookInstances : []) : []
 
         return (
             <EditFormModal
@@ -51,17 +51,17 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
                 btnSubmitDisabled={pristine || submitting}
                 btnCancelDisable={submitting}
             >
-                <Tabs defaultActiveKey="info" id="book-tab" className="mb-3">
-                    <Tab eventKey="info" title="Book Info">
-                        <BookInfo
+                <Tabs defaultActiveKey="book-detail" id="book-tab" className="mb-3">
+                    <Tab eventKey="book-detail" title="Book Info">
+                        <BookDetail
                             currentBook={initialValues}
                             authors={this.props.authors}
                             genres={this.props.genres}
                         />
                     </Tab>
                     <Tab eventKey="book-intances" title="Book Instances">
-                        <BookInstances
-                            currentBook={initialValues}
+                        <BookInstanceTable
+                            bookInstances={bookInstances}
                         />
                     </Tab>
                 </Tabs>

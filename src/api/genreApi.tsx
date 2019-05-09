@@ -40,6 +40,13 @@ export const getGenreDetail = (id: number) => {
             genre(id: $id) {
                 id
                 name
+                books {
+                    id
+                    title
+                    author {
+                        name
+                    }
+                }
             }
         }
         `
