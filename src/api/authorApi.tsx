@@ -34,6 +34,11 @@ export function getAuthorDetail(id: number) {
             
             name
             lifespan
+            books {
+                id
+                title
+                summary
+            }
         }
     }
     `

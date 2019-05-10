@@ -9,6 +9,7 @@ import RootState from '../../../../modules/rootState'
 import { Author } from '../../../../../dto';
 
 const authorActions = rootActions.authorActions;
+const bookActions = rootActions.bookActions;
 
 const mapStateToProps = (state: RootState, ownProps: any) => {
     return {
@@ -26,6 +27,9 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, ownProps: any) => {
         },
         handleDelete(id: number) {
             dispatch(authorActions.deleteAuthorAsync(id))
+        },
+        onBookClick(bookId: number) {
+            dispatch(bookActions.getBookDetailAsync(bookId));
         }
     }
 }

@@ -51,6 +51,6 @@ class BookCreateForm extends Component<Props & ModalProps & InjectedFormProps<Bo
 }
 
 export default reduxForm<Book, Props & ModalProps>({
-    form: 'bookEditForm',
+    form: 'bookCreateForm',
     enableReinitialize: true
 })(BookCreateForm)

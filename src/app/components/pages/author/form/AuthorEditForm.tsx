@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import { reduxForm, InjectedFormProps } from 'redux-form';
+import { Tabs, Tab } from 'react-bootstrap';
 
 import { EditFormModal } from '../../../template'
-import { Author } from '../../../../../dto';
+import { Author, Book } from '../../../../../dto';
+import AuthorDetail from './AuthorDetail';
+import BookTable from './BookTable';
 
 interface ModalProps {
     show: boolean,
     handleDelete: (id: number) => void,
-    onHide: () => void
+    onHide: () => void,
+    onBookClick: (bookId: number) => void
 }
 
 class AuthorEditForm extends Component<ModalProps & InjectedFormProps<Author, ModalProps>> {
     render() {
-        const { show, handleSubmit, handleDelete, onHide, pristine, submitting } = this.props
+        const { initialValues, show, handleSubmit, handleDelete, onBookClick, onHide, pristine, submitting } = this.props
+        const books : Book[] = initialValues ? (initialValues.books ? initialValues.books : []) : []
 
         return (
             <EditFormModal
@@ -24,37 +29,14 @@ class AuthorEditForm extends Component<ModalProps & InjectedFormProps<Author, Mo
                 btnSubmitDisabled={pristine || submitting}
                 btnCancelDisable={submitting}
             >
-                <div className="form-row">
-                    <div className="form-group col-6">
-                        <label>Name</label>
-                        <Field name="name" component="input" className="form-control" disabled />
-                    </div>
-                    <div className="form-group col-6">
-                        <label>Lifespan</label>
-                        <Field name="lifespan" component="input" className="form-control" disabled />
-                    </div>
-                </div>
-                <hr/>
-                <div className="form-row">
-                    <div className="form-group col-6">
-                        <label>First Name</label>
-                        <Field name="first_name" component="input" className="form-control" />
-                    </div>
-                    <div className="form-group col-6">
-                        <label>Family Name</label>
-                        <Field name="family_name" component="input" className="form-control" />
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-6">
-                        <label>Date of birth</label>
-                        <Field name="date_of_birth" component="input" type="date" className="form-control" />
-                    </div>
-                    <div className="form-group col-6">
-                        <label>Date of death</label>
-                        <Field name="date_of_death" component="input" type="date" className="form-control" />
-                    </div>
-                </div>
+                <Tabs defaultActiveKey="author-detail" id="author-tab">
+                    <Tab eventKey="author-detail" title="Author">
+                        <AuthorDetail />
+                    </Tab>
+                    <Tab eventKey="book-table" title="Books">
+                        <BookTable books={books} onBookClick={onBookClick}/>
+                    </Tab>
+                </Tabs>
             </EditFormModal> 
         )
     }

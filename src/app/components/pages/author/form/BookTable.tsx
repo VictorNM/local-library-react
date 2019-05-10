@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 interface RowProps {
     title: string,
-    author_name: string,
+    summary: string,
     onBookClick: () => void
 }
 
@@ -13,19 +13,17 @@ interface TableProps {
     books: {
         id: number,
         title: string,
-        author: {
-            name: string
-        }
+        summary: string
     }[],
     onBookClick: (bookId: number) => void
 }
 
 const BookRow: React.FC<RowProps> = props => {
-    const { title, author_name } = props
+    const { title, summary } = props
     return (
         <Row>
             <td className="col-6"><Link to="/book" onClick={props.onBookClick} style={{textDecoration: 'none', color: 'inherit'}}>{title}</Link></td>
-            <td className="col-6">{author_name}</td>
+            <td className="col-6">{summary}</td>
         </Row>
     )
 }
@@ -47,7 +45,7 @@ const BookTable: React.FC<TableProps> = props => {
                             key={book.id}
 
                             title={book.title}
-                            author_name={book.author ? book.author.name : ''}
+                            summary={book.summary}
                             onBookClick={() => props.onBookClick(book.id)}
                         />
                     )

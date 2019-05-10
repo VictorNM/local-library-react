@@ -11,7 +11,9 @@ export interface Author {
     date_of_death: string,
 
     name: string,
-    lifespan: number
+    lifespan: number,
+
+    books?: Book[]
 }
 
 export interface Book {
@@ -21,7 +23,7 @@ export interface Book {
     summary: string,
     isbn: string,
     genres: Genre[],
-    bookInstances: BookInstance[]
+    bookInstances?: BookInstance[]
 }
 
 export interface BookInstance {

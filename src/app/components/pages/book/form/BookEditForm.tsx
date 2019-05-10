@@ -52,7 +52,7 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
                 btnCancelDisable={submitting}
             >
                 <Tabs defaultActiveKey="book-detail" id="book-tab" className="mb-3">
-                    <Tab eventKey="book-detail" title="Book Info">
+                    <Tab eventKey="book-detail" title="Book">
                         <BookDetail
                             currentBook={initialValues}
                             authors={this.props.authors}
@@ -60,7 +60,9 @@ class BookEditForm extends Component<Props & ModalProps & InjectedFormProps<Book
                         />
                     </Tab>
                     <Tab eventKey="book-intances" title="Book Instances">
-                        <BookInstanceTable
+                        <Field 
+                            name="bookInstances" 
+                            component={BookInstanceTable} 
                             bookInstances={bookInstances}
                         />
                     </Tab>

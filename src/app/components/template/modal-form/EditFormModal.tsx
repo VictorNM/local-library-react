@@ -62,14 +62,6 @@ class EditFormModal extends Component<Props, State> {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <div className="clearfix p-0 m-0">
-                            <span className="float-right">
-                                <button type="button" onClick={this.showDeleteConfirm} className="btn btn-square btn-outline-danger">
-                                    <FontAwesomeIcon icon={faTrashAlt} />
-                                </button>
-                            </span>
-                        </div>
-                        <hr/>
                         {children}
                     </Modal.Body>
 
@@ -80,7 +72,10 @@ class EditFormModal extends Component<Props, State> {
                             disabled={btnSubmitDisabled}
                         >
                             Save
-                    </button>
+                        </button>
+                        <button type="button" onClick={this.showDeleteConfirm} className="btn btn-danger">
+                            Delete
+                                </button>
                         <button
                             type="button"
                             onClick={onHide}
@@ -88,7 +83,7 @@ class EditFormModal extends Component<Props, State> {
                             disabled={btnCancelDisable}
                         >
                             Cancel
-                    </button>
+                        </button>
                     </Modal.Footer>
 
                 </form>
